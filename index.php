@@ -1,35 +1,35 @@
 <?php
- require_once '_connec.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+ require_once 'connec.php';
+
 $pdo = new \PDO(DSN, USER, PASS);
 
 $query = "SELECT * FROM friend";
 $statement = $pdo->query($query);
 $friends = $statement->fetchAll();
+   var_dump($_POST);
 
- 
-if (isset($_POST['firstname'])) {
-   
-    $firstname = trim($_POST['firstname']);
-    $lastname = trim($_POST['lastname']); 
     $query = "INSERT INTO friend (firstname, lastname)
                  VALUES (:firstname, :lastname)";
+
     $statement = $pdo->prepare($query);
-                
+
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];         
     
     $statement->bindValue(':firstname', $firstname, \PDO::PARAM_STR);
     $statement->bindValue(':lastname', $lastname, \PDO::PARAM_STR);
     
     
-    $statement->execute();
-    
-    
-    $friends = $statement->fetchAll(PDO::FETCH_ASSOC);
+   $sucess = $statement->execute();   
 
 }
+
 foreach($friends as $friend) {
     echo $friend['firstname'] . ' ' . $friend['lastname'] . PHP_EOL;
-    echo "</br>";
-    
+    echo "</br>";  
 }
 ?>
 
