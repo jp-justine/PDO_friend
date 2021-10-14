@@ -11,8 +11,10 @@ if (isset($_POST['firstname'])) {
    
     $firstname = trim($_POST['firstname']);
     $lastname = trim($_POST['lastname']); 
-    $query = 'SELECT * FROM friend WHERE  firstname=:firstname AND lastname=:lastname';
+    $query = "INSERT INTO friend (firstname, lastname)
+                 VALUES (:firstname, :lastname)";
     $statement = $pdo->prepare($query);
+                
     
     $statement->bindValue(':firstname', $firstname, \PDO::PARAM_STR);
     $statement->bindValue(':lastname', $lastname, \PDO::PARAM_STR);
