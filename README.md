@@ -18,3 +18,4 @@ La connexion à la base de données est correctement configurée avec PDO (tu pe
 La page affiche la liste des friends contenus dans ta propre base de données.
 La page affiche un formulaire d'ajout de friend. Lorsque tu soumets le formulaire, un nouveau friend apparaît dans la liste.
 La requête d’insertion est une requête préparée.
+# PDO_friend
